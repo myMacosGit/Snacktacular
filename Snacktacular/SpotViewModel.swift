@@ -25,24 +25,17 @@ class SpotViewModel : ObservableObject {
 
             }
         } else {
-
+            
             do {
-                _ = try await db.collection("spots").addDocument(data: spot.dictionary)  // warning about not using return
-                print ("Data added successfully")
+                let rc = try await db.collection("spots").addDocument(data: spot.dictionary)  // warning about not using return
+                print ("Data added successfully, rc = \(rc)")
                 return true
             } catch {
                 print("ERROR: could not create a new spot in 'spots' \(error.localizedDescription)")
                 return false
-
             }
-
-            
-            
             
         } // if
         
-        
-        
     } // saveSpot
-    
-}
+} // SpotViewModel

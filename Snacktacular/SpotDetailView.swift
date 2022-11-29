@@ -10,6 +10,7 @@ import SwiftUI
 struct SpotDetailView: View {
     @EnvironmentObject var spotVM : SpotViewModel
     @State var spot: Spot
+    @State private var showPlaceLookupSheet = false
     @Environment (\.dismiss) private var dismiss
     
     
@@ -55,13 +56,24 @@ struct SpotDetailView: View {
                         } // Task
                         dismiss()
                     } // Button
-                }
-
-
-
-
+                } // ToolbarItem
+                
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Spacer()
+                    Button {
+                        showPlaceLookupSheet.toggle()
+                        
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                        Text("Lookup Place")
+                    }
+                } // ToolbarItem
             } // if
         } // .toolbar
+        .sheet(isPresented: $showPlaceLookupSheet) {
+            PlaceLookupView(spot: $spot)
+        }
+        
     }
 }
 
