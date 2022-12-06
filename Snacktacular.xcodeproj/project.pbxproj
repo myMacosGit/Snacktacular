@@ -17,9 +17,12 @@
 		0BA132062936259900E64A4A /* PlaceLookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA132012936259900E64A4A /* PlaceLookupView.swift */; };
 		0BA132072936259900E64A4A /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA132022936259900E64A4A /* PlaceViewModel.swift */; };
 		0BA132082936259900E64A4A /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA132032936259900E64A4A /* Place.swift */; };
+		0BA4128F293CA50800E1E1AA /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA4128E293CA50800E1E1AA /* Review.swift */; };
+		0BA41291293CA75900E1E1AA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA41290293CA75900E1E1AA /* ReviewView.swift */; };
 		0BEAD2822926660C00AF9190 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEAD2812926660C00AF9190 /* Spot.swift */; };
 		0BEAD284292667D900AF9190 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEAD283292667D900AF9190 /* SpotDetailView.swift */; };
 		0BEAD28629266D5600AF9190 /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEAD28529266D5600AF9190 /* SpotViewModel.swift */; };
+		0BFC480B293F3A250012C8FF /* StarsSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFC480A293F3A250012C8FF /* StarsSelectionView.swift */; };
 		F96926E5292A7CBA00A0B61C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F96926E4292A7CBA00A0B61C /* FirebaseAuth */; };
 		F96926E7292A7CBA00A0B61C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F96926E6292A7CBA00A0B61C /* FirebaseFirestore */; };
 		F96926E9292A7CBA00A0B61C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F96926E8292A7CBA00A0B61C /* FirebaseFirestoreSwift */; };
@@ -39,9 +42,12 @@
 		0BA132012936259900E64A4A /* PlaceLookupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceLookupView.swift; sourceTree = "<group>"; };
 		0BA132022936259900E64A4A /* PlaceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
 		0BA132032936259900E64A4A /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		0BA4128E293CA50800E1E1AA /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		0BA41290293CA75900E1E1AA /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		0BEAD2812926660C00AF9190 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		0BEAD283292667D900AF9190 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
 		0BEAD28529266D5600AF9190 /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
+		0BFC480A293F3A250012C8FF /* StarsSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,15 +86,9 @@
 			children = (
 				0B7F1CA32918ED4D008530F5 /* Info.plist */,
 				0B7F1C952918EBB9008530F5 /* SnacktacularApp.swift */,
-				0BA132032936259900E64A4A /* Place.swift */,
-				0BEAD2812926660C00AF9190 /* Spot.swift */,
-				0BEAD28529266D5600AF9190 /* SpotViewModel.swift */,
-				0BA132022936259900E64A4A /* PlaceViewModel.swift */,
-				0BA132002936259900E64A4A /* LocationManager.swift */,
-				0B7F1C972918EBB9008530F5 /* LoginView.swift */,
-				0B805E23291BAABA00C1B5F7 /* ListView.swift */,
-				0BEAD283292667D900AF9190 /* SpotDetailView.swift */,
-				0BA132012936259900E64A4A /* PlaceLookupView.swift */,
+				0BA4128B293CA43200E1E1AA /* Models */,
+				0BA4128C293CA46000E1E1AA /* ViewModels */,
+				0BA4128D293CA48300E1E1AA /* Views */,
 				0B7F1C992918EBBB008530F5 /* Assets.xcassets */,
 				0B7F1CAD2918FBA3008530F5 /* GoogleService-Info.plist */,
 				0B7F1C9B2918EBBB008530F5 /* Preview Content */,
@@ -102,6 +102,39 @@
 				0B7F1C9C2918EBBB008530F5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0BA4128B293CA43200E1E1AA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0BA132032936259900E64A4A /* Place.swift */,
+				0BEAD2812926660C00AF9190 /* Spot.swift */,
+				0BA4128E293CA50800E1E1AA /* Review.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0BA4128C293CA46000E1E1AA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0BEAD28529266D5600AF9190 /* SpotViewModel.swift */,
+				0BA132022936259900E64A4A /* PlaceViewModel.swift */,
+				0BA132002936259900E64A4A /* LocationManager.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0BA4128D293CA48300E1E1AA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B7F1C972918EBB9008530F5 /* LoginView.swift */,
+				0B805E23291BAABA00C1B5F7 /* ListView.swift */,
+				0BEAD283292667D900AF9190 /* SpotDetailView.swift */,
+				0BA132012936259900E64A4A /* PlaceLookupView.swift */,
+				0BA41290293CA75900E1E1AA /* ReviewView.swift */,
+				0BFC480A293F3A250012C8FF /* StarsSelectionView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,9 +220,12 @@
 				0BEAD284292667D900AF9190 /* SpotDetailView.swift in Sources */,
 				0BA132072936259900E64A4A /* PlaceViewModel.swift in Sources */,
 				0B7F1C982918EBB9008530F5 /* LoginView.swift in Sources */,
+				0BFC480B293F3A250012C8FF /* StarsSelectionView.swift in Sources */,
 				0BA132062936259900E64A4A /* PlaceLookupView.swift in Sources */,
+				0BA41291293CA75900E1E1AA /* ReviewView.swift in Sources */,
 				0BEAD28629266D5600AF9190 /* SpotViewModel.swift in Sources */,
 				0BA132052936259900E64A4A /* LocationManager.swift in Sources */,
+				0BA4128F293CA50800E1E1AA /* Review.swift in Sources */,
 				0B7F1C962918EBB9008530F5 /* SnacktacularApp.swift in Sources */,
 				0B805E24291BAABA00C1B5F7 /* ListView.swift in Sources */,
 				0BEAD2822926660C00AF9190 /* Spot.swift in Sources */,

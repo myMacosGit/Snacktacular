@@ -89,13 +89,11 @@ struct LoginView: View {
             if Auth.auth().currentUser != nil {
                 print ("🪵 Login/Registration Success")
                 presentSheet = true
-
             }
         }
         .fullScreenCover(isPresented: $presentSheet) {
             ListView()
         }
-        
     } // View
     
     func enableButtons () {
@@ -116,7 +114,6 @@ struct LoginView: View {
             } else {
                 print ("Sign UP/Registration Success")
                 presentSheet = true
-
             }
         }
     } // register
@@ -131,13 +128,10 @@ struct LoginView: View {
             } else {
                 print ("🪵 Login/Registration Success")
                 presentSheet = true
-
             }
         }
     } // login
-    
 } // LoginView
-
 
 extension View {
     func Print(_ vars: Any...) -> some View {

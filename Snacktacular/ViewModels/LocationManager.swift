@@ -53,19 +53,17 @@ extension LocationManager: CLLocationManagerDelegate {
                          didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
            
-        print ("===== \(location)  = \(locations.count)  ")
+        print ("===== \(location)  = \(locations.count)")
         
         self.location = location
         
         //let a = location.altitude
         
         self.region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
-        
-    }
+    } // locationManager
     
-
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print ("##### \(error.localizedDescription)")
-    }
+    } // locationManager
     
-}
+} // LocationManager

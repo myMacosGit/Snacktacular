@@ -50,7 +50,7 @@ struct PlaceLookupView: View {
                     
                     print ("+++++ returnedPlace \(place.name)")
                     dismiss()
-                }
+                } // onTapGesture
             } // List
             .listStyle(.plain)
             .searchable(text: $searchText)
@@ -60,8 +60,9 @@ struct PlaceLookupView: View {
                 } else {
                     // Entry some characters, then remove all characters
                     placeVM.places = [] // text field was erased
-                }
-            })
+                } // if
+            }) // onChange
+            
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     Button("Dismiss") {
@@ -69,9 +70,9 @@ struct PlaceLookupView: View {
                     }
                 }
             } // toolbar
-        }
-    }
-}
+        } // NavigationStack
+    } // View
+} // PlaceLookupView
 
 struct PlaceLookupView_Previews: PreviewProvider {
     static var previews: some View {

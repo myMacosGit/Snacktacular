@@ -13,6 +13,7 @@ class PlaceViewModel : ObservableObject {
     @Published  var places: [Place] = []
     
     func search(text: String, region: MKCoordinateRegion) {
+        
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = text
         searchRequest.region = region
@@ -27,6 +28,9 @@ class PlaceViewModel : ObservableObject {
                 return
             }
             self.places = response.mapItems.map(Place.init)  // return array
-        }
+            
+            print("----- search/self.places = \(self.places.count)")
+            
+        } // search
     } // aearch
 }

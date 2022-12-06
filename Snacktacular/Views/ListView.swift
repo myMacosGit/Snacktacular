@@ -10,13 +10,16 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct ListView: View {
+    
     @FirestoreQuery(collectionPath: "spots") var spots: [Spot]
     
     @State private var sheetIsPresented = false
     @Environment (\.dismiss) private var dismiss
     
     var body: some View {
-        
+
+        let _ = print (">>>>> ListView/View")
+
         NavigationStack {
             List(spots) { spot in
                 NavigationLink {
@@ -25,8 +28,7 @@ struct ListView: View {
                     Text(spot.name)
                         .font(.title2)
                 }
-                
-            }
+            } // List
             
             .listStyle(.plain)
             .navigationTitle("Snack Spots")
@@ -55,8 +57,8 @@ struct ListView: View {
                 NavigationStack {
                     SpotDetailView(spot: Spot())
                 }
-            }
-        }
+            } // sheet
+        } // NavigationStack
     } // body
 } // ListView
 

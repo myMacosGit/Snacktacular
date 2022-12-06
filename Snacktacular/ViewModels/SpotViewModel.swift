@@ -15,6 +15,7 @@ class SpotViewModel : ObservableObject {
         let db = Firestore.firestore()  // let db line error?
         
         if let id = spot.id {
+            // Update
             do {
                 try await db.collection("spots").document(id).setData(spot.dictionary)
                 print ("Data update successfully")
@@ -25,7 +26,7 @@ class SpotViewModel : ObservableObject {
 
             }
         } else {
-            
+            // Add
             do {
                 let rc = try await db.collection("spots").addDocument(data: spot.dictionary)  // warning about not using return
                 print ("Data added successfully, rc = \(rc)")
@@ -34,8 +35,6 @@ class SpotViewModel : ObservableObject {
                 print("ERROR: could not create a new spot in 'spots' \(error.localizedDescription)")
                 return false
             }
-            
         } // if
-        
     } // saveSpot
 } // SpotViewModel
