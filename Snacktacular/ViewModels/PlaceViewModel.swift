@@ -9,6 +9,7 @@ import Foundation
 import MapKit
 
 @MainActor
+
 class PlaceViewModel : ObservableObject {
     @Published  var places: [Place] = []
     

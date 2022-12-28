@@ -87,7 +87,7 @@ struct LoginView: View {
             Button("OK", role: .cancel) { }
         }.onAppear() {
             if Auth.auth().currentUser != nil {
-                print ("🪵 Login/Registration Success")
+                print ("🪵 Login/Registration Success   \(String(describing: Auth.auth().currentUser))  ")
                 presentSheet = true
             }
         }

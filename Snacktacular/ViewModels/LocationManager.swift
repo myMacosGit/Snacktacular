@@ -9,6 +9,7 @@ import Foundation
 import MapKit
 
 @MainActor
+
 class LocationManager: NSObject, ObservableObject {
     
     @Published var location: CLLocation?

@@ -9,10 +9,10 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-struct Review: Identifiable, Codable {
+struct Review: Identifiable, Codable, Equatable {
     @DocumentID var id: String?
-    
-    var title = ""
+   
+    var title:String = ""
     var body = ""
     var rating = 0
     var reviewer = ""
@@ -22,9 +22,8 @@ struct Review: Identifiable, Codable {
         return ["title": title,
                 "body": body,
                 "rating": rating,
-                "reviewer": Auth.auth().currentUser?.email ?? "",
-                "posted": Timestamp(date: Date() )
-        ]
+                "reviewer": Auth.auth().currentUser?.email ?? "email?",
+                "postedOn": Timestamp(date: Date() ) ]
     }
     
 }

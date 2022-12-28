@@ -19,6 +19,8 @@ struct ListView: View {
     var body: some View {
 
         let _ = print (">>>>> ListView/View")
+        let _ = print ("\(spots.count)")
+        let _ = print ("\($spots.path)")
 
         NavigationStack {
             List(spots) { spot in
