@@ -16,7 +16,6 @@ class TestClass:  ObservableObject {
     }
 }
 
-
 struct Place: Identifiable {
     let id = UUID().uuidString
     private var mapItem: MKMapItem

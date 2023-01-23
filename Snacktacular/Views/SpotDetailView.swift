@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 import Firebase
 import FirebaseFirestoreSwift
+import PhotosUI
 
 
 struct SpotDetailView: View {
@@ -41,6 +42,17 @@ struct SpotDetailView: View {
     
     @State private var mapRegion = MKCoordinateRegion()
     @State private var annotations: [Annotation] = []
+    @State private var selectedPhoto: PhotosPickerItem?
+    
+    var avgRating: String {  // can not use state variables as computed properties
+        guard reviews.count != 0 else {
+            return "-.-"
+        }
+        // Get averagg pf all reviews in array
+        let averageValue = Double(reviews.reduce(0) {$0 + $1.rating}) / Double(reviews.count)
+        
+        return String(format: "%.1f", averageValue)
+    }
     
     @Environment (\.dismiss) private var dismiss
     
@@ -60,6 +72,7 @@ struct SpotDetailView: View {
         
         VStack  {
             Group {
+                Text("\(String(describing: Auth.auth().currentUser?.email)) ")
                 TextField("Name", text: $spot.name)
                     .font(.title)
                 TextField("Address", text: $spot.address)
@@ -84,53 +97,88 @@ struct SpotDetailView: View {
                     annotations = [Annotation(name:spot.name, address: spot.address, coordinate: spot.coordinate)]
                     mapRegion.center = spot.coordinate
                 } // onChange
+            
+            
+            HStack{
+                Group {
+                    Text("Avg. Rating:")
+                        .font(.title2)
+                        .bold()
+                    Text(avgRating)
+                        .font(.title)
+                        .fontWeight(.black)
+                        .foregroundColor(Color("SnackColor"))
+                } // Group
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                
+                Spacer()
+            
+                Group {
+                    PhotosPicker(selection: $selectedPhoto, matching: .images, preferredItemEncoding: .automatic) {
+                        Image(systemName: "photo")
+                        Text("Photo")
+                        
+                    } // PhotoPicker
+                    .onChange(of: selectedPhoto) { newValue in
+                        Task {
+                            do {
+                                if let data = try await newValue?.loadTransferable(type: Data.self) {
+                                    if let uiImage = UIImage(data: data) {
+                                        // TODO : This is where yu set your image - Image(uiImage.uiImage)
+                                        print ("Successfully selected image")
+                                    }
+                                }
+                            } catch {
+                                print ("ERROR: selecting image failed \(error.localizedDescription)" )
+                            } // do
+                        }
+                    }
+                    
+                    Button(action: {
+                        if spot.id == nil {
+                            showSaveAlert.toggle()
+                        } else {
+                            showReviewViewSheet.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "star.fill")
+                        Text("Rate")
+                    })
+                } // Group
+                .font(Font.caption)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+
+                .buttonStyle(.borderedProminent)
+                .tint(Color("SnackColor"))
+                
+            } // HStack
+            .padding(.horizontal)
+            
+            
             List{
                 Section {
                     
-                    let _ = print ("count = \(reviews.count)")
-                    let _ = print ("count.spot = \(spot.name)")
+                    //let _ = print ("count = \(reviews.count)")
+                    //let _ = print ("count.spot = \(spot.name)")
                     
                     
                     //let _ = print ("myspots = \(myspots.count)")
                     
                     let _ = print ("reviews.path = \($reviews.path)")
                     
-            
+                    
                     
                     ForEach(reviews) { review in
                         NavigationLink {
                             ReviewView(spot:spot, review: review)
                         } label: {
-                            Text("\(review.title)") //TODO: build a custom cell showing stars
+                            //Text("\(review.title)") //TODO: build a custom cell showing stars
+                            SpotReviewRowView(review: review)
                         }
                     }
-                } header: {
-                    HStack{
-                        Text("Avg. Rating:")
-                            .font(.title2)
-                            .bold()
-                        Text("4.5") // TODO: change
-                            .font(.title)
-                            .fontWeight(.black)
-                            .foregroundColor(Color("SnackColor"))
-                        
-                        Spacer()
-                        Button("Rate It") {
-                            if spot.id == nil {
-                                showSaveAlert.toggle()
-                            } else {
-                                showReviewViewSheet.toggle()
-                            }
-                            
-                            let _ = print ("-------  \($showReviewViewSheet)  ")
-                            
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .bold()
-                        .tint(Color("SnackColor"))
-                        
-                    } // HStack
-                } // header
+                }
                 .headerProminence(.increased)
             } // List
             .listStyle(.plain) // default list style
@@ -149,13 +197,13 @@ struct SpotDetailView: View {
                 print ("reviews.path.spots.name = \(spot.name)")
                 print ("reviews.path = \($reviews.path)")
                 print ("reviews = \($reviews)")
-            
-
+                
+                
                 //$myspots.path = "spots"
                 //print ("myspots.path = \($myspots.path)")
                 //print ("myspots = \($myspots)")
-
-  
+                
+                
                 
                 
             } else { // spot.id starts out as nil

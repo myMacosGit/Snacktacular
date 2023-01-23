@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B08A117294C9C79000A49D2 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B08A116294C9C79000A49D2 /* ReviewViewModel.swift */; };
+		0B785756296EBC8D00B287A3 /* SpotReviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B785755296EBC8D00B287A3 /* SpotReviewRowView.swift */; };
 		0B7F1C962918EBB9008530F5 /* SnacktacularApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7F1C952918EBB9008530F5 /* SnacktacularApp.swift */; };
 		0B7F1C982918EBB9008530F5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7F1C972918EBB9008530F5 /* LoginView.swift */; };
 		0B7F1C9A2918EBBB008530F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B7F1C992918EBBB008530F5 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		0B08A116294C9C79000A49D2 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		0B785755296EBC8D00B287A3 /* SpotReviewRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotReviewRowView.swift; sourceTree = "<group>"; };
 		0B7F1C922918EBB9008530F5 /* Snacktacular.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snacktacular.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7F1C952918EBB9008530F5 /* SnacktacularApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnacktacularApp.swift; sourceTree = "<group>"; };
 		0B7F1C972918EBB9008530F5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				0B7F1C972918EBB9008530F5 /* LoginView.swift */,
 				0B805E23291BAABA00C1B5F7 /* ListView.swift */,
 				0BEAD283292667D900AF9190 /* SpotDetailView.swift */,
+				0B785755296EBC8D00B287A3 /* SpotReviewRowView.swift */,
 				0BA132012936259900E64A4A /* PlaceLookupView.swift */,
 				0BA41290293CA75900E1E1AA /* ReviewView.swift */,
 				0BFC480A293F3A250012C8FF /* StarsSelectionView.swift */,
@@ -226,6 +229,7 @@
 				0B7F1C982918EBB9008530F5 /* LoginView.swift in Sources */,
 				0BFC480B293F3A250012C8FF /* StarsSelectionView.swift in Sources */,
 				0BA132062936259900E64A4A /* PlaceLookupView.swift in Sources */,
+				0B785756296EBC8D00B287A3 /* SpotReviewRowView.swift in Sources */,
 				0BA41291293CA75900E1E1AA /* ReviewView.swift in Sources */,
 				0BEAD28629266D5600AF9190 /* SpotViewModel.swift in Sources */,
 				0BA132052936259900E64A4A /* LocationManager.swift in Sources */,

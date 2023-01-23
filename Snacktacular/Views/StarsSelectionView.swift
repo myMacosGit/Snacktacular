@@ -9,11 +9,14 @@ import SwiftUI
 
 struct StarsSelectionView: View {
     @Binding var rating: Int // change this to @Binding after layout is tested
+    @State var interactive = true
     
     let highestRating = 5
     let unselected = Image(systemName: "star")
     let selected = Image(systemName: "star.fill")
-    let font: Font = .largeTitle
+    
+    var font: Font = .largeTitle
+    
     let fillColor: Color = .red
     let emptyColor: Color = .gray
     
@@ -23,7 +26,9 @@ struct StarsSelectionView: View {
                 showStar(for: number)
                     .foregroundColor(number <= rating ? fillColor: emptyColor)
                     .onTapGesture {
-                        rating = number
+                        if interactive {
+                            rating = number
+                        }
                     }
             }
             .font(font)

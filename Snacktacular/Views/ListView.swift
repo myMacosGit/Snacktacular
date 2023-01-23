@@ -21,6 +21,7 @@ struct ListView: View {
         let _ = print (">>>>> ListView/View")
         let _ = print ("\(spots.count)")
         let _ = print ("\($spots.path)")
+        let _ = print ("\(String(describing: $spots.error))")
 
         NavigationStack {
             List(spots) { spot in

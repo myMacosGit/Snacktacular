@@ -15,14 +15,14 @@ struct Review: Identifiable, Codable, Equatable {
     var title:String = ""
     var body = ""
     var rating = 0
-    var reviewer = ""
+    var reviewer = Auth.auth().currentUser?.email ?? "email?"
     var postedOn = Date()
     
     var dictionary: [String: Any] {
         return ["title": title,
                 "body": body,
                 "rating": rating,
-                "reviewer": Auth.auth().currentUser?.email ?? "email?",
+                "reviewer": reviewer,
                 "postedOn": Timestamp(date: Date() ) ]
     }
     
