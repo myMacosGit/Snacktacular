@@ -14,6 +14,10 @@ import PhotosUI
 
 struct SpotDetailView: View {
     
+    enum ButtonPressed {
+        case review, photo
+    }
+    
     struct Annotation: Identifiable {
         let id = UUID().uuidString
         var name: String
@@ -21,6 +25,7 @@ struct SpotDetailView: View {
         var coordinate: CLLocationCoordinate2D
         
     }
+    @Environment (\.dismiss) private var dismiss
     
     @EnvironmentObject var reviewVM : ReviewViewModel //
     
@@ -28,6 +33,7 @@ struct SpotDetailView: View {
     @EnvironmentObject var locationManager : LocationManager
     // Variable below does not have the right path, change in .onAppear
     @FirestoreQuery(collectionPath: "spots") var reviews: [Review]
+    @FirestoreQuery(collectionPath: "spots") var photos: [Photo]
     
     //@FirestoreQuery(collectionPath: "spots") var myspots: [Spot]
     
@@ -38,6 +44,11 @@ struct SpotDetailView: View {
     @State private var showReviewViewSheet = false
     @State private var showSaveAlert = false
     @State private var showingAsSheet = false
+    @State private var showPhotoViewSheet = false
+    
+    
+    @State private var buttonPressed = ButtonPressed.review
+    @State private var uiImageSelected = UIImage()
     
     
     @State private var mapRegion = MKCoordinateRegion()
@@ -54,7 +65,7 @@ struct SpotDetailView: View {
         return String(format: "%.1f", averageValue)
     }
     
-    @Environment (\.dismiss) private var dismiss
+    
     
     let regionSize = 500.0 // meters
     
@@ -92,12 +103,13 @@ struct SpotDetailView: View {
                 annotationItems: annotations) { annotation in
                 MapMarker(coordinate: annotation.coordinate)
             }
-                .frame(height: 250)
-                .onChange(of: spot) { _ in
-                    annotations = [Annotation(name:spot.name, address: spot.address, coordinate: spot.coordinate)]
+            .frame(height: 250)
+            .onChange(of: spot) { _ in
+                annotations = [Annotation(name:spot.name, address: spot.address, coordinate: spot.coordinate)]
                     mapRegion.center = spot.coordinate
-                } // onChange
+            } // onChange
             
+            SpotDetailPhotosScrollView(photos: photos, spot: spot)
             
             HStack{
                 Group {
@@ -113,7 +125,7 @@ struct SpotDetailView: View {
                 .minimumScaleFactor(0.5)
                 
                 Spacer()
-            
+                
                 Group {
                     PhotosPicker(selection: $selectedPhoto, matching: .images, preferredItemEncoding: .automatic) {
                         Image(systemName: "photo")
@@ -124,9 +136,17 @@ struct SpotDetailView: View {
                         Task {
                             do {
                                 if let data = try await newValue?.loadTransferable(type: Data.self) {
+                                    
                                     if let uiImage = UIImage(data: data) {
-                                        // TODO : This is where yu set your image - Image(uiImage.uiImage)
+                                        uiImageSelected = uiImage
+                                        buttonPressed = .photo
                                         print ("Successfully selected image")
+                                        if spot.id == nil {
+                                            showSaveAlert.toggle()
+                                        } else {
+                                            showPhotoViewSheet.toggle()
+                                        }
+                                        
                                     }
                                 }
                             } catch {
@@ -136,6 +156,7 @@ struct SpotDetailView: View {
                     }
                     
                     Button(action: {
+                        buttonPressed = .review
                         if spot.id == nil {
                             showSaveAlert.toggle()
                         } else {
@@ -149,7 +170,7 @@ struct SpotDetailView: View {
                 .font(Font.caption)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
-
+                
                 .buttonStyle(.borderedProminent)
                 .tint(Color("SnackColor"))
                 
@@ -203,8 +224,8 @@ struct SpotDetailView: View {
                 //print ("myspots.path = \($myspots.path)")
                 //print ("myspots = \($myspots)")
                 
-                
-                
+                $photos.path = "spots/\(spot.id ?? "")/photos"
+                print ("photos.path = \($photos.path)")
                 
             } else { // spot.id starts out as nil
                 showingAsSheet = true
@@ -283,6 +304,12 @@ struct SpotDetailView: View {
                 ReviewView(spot: spot, review: Review())
             }
         } // sheet
+        
+        .sheet(isPresented: $showPhotoViewSheet) {
+            NavigationStack{
+                PhotoView(uiImage: uiImageSelected, spot: spot)
+            }
+        }
         .alert("Cannot Rate Place Unless Saved", isPresented: $showSaveAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Save", role: .none) {
@@ -291,7 +318,21 @@ struct SpotDetailView: View {
                     spot = spotVM.spot
                     if success {
                         // If we did not update the path after saving spot, we would not to show the new reviews added
+                        
                         $reviews.path = "spots/\(spot.id ?? "")/reviews"
+                        
+                        $photos.path = "spots/\(spot.id ?? "")/photos"
+                        
+                        switch (buttonPressed) {
+                            case .review:
+                                showReviewViewSheet.toggle()
+                                
+                            case .photo:
+                                showPhotoViewSheet.toggle()
+                        }
+                        
+                        
+                        
                         showReviewViewSheet.toggle()
                     } else {
                         print ("ERROR: error saving spot")
