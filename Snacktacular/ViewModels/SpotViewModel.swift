@@ -54,7 +54,11 @@ class SpotViewModel : ObservableObject {
             return false
         }
         
-        let photoName = UUID().uuidString
+        var photoName = UUID().uuidString
+        if photo.id != nil {
+            photoName = photo.id! // force unwrap, If I have a photo.id, so use this a the photoname. This happens if we're updating a existing Photo's description info. It'll resave the photo, but it just overwrites the existing one.
+        }
+        
         let storage = Storage.storage()
         let storageRef = storage.reference().child("\(spotID)/\(photoName).jpeg")
         

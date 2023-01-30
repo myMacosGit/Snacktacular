@@ -39,6 +39,7 @@ struct SpotDetailView: View {
     
     
     @State var spot: Spot
+    @State var newPhoto = Photo()
     
     @State private var showPlaceLookupSheet = false
     @State private var showReviewViewSheet = false
@@ -141,6 +142,7 @@ struct SpotDetailView: View {
                                         uiImageSelected = uiImage
                                         buttonPressed = .photo
                                         print ("Successfully selected image")
+                                        newPhoto = Photo() // clears out contents, if you have more than one photo in a row for this spot
                                         if spot.id == nil {
                                             showSaveAlert.toggle()
                                         } else {
@@ -307,7 +309,7 @@ struct SpotDetailView: View {
         
         .sheet(isPresented: $showPhotoViewSheet) {
             NavigationStack{
-                PhotoView(uiImage: uiImageSelected, spot: spot)
+                PhotoView(photo: $newPhoto, uiImage: uiImageSelected, spot: spot)
             }
         }
         .alert("Cannot Rate Place Unless Saved", isPresented: $showSaveAlert) {
